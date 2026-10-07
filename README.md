@@ -57,8 +57,14 @@ Notes:
 ### 2026-10-06: Recorded hardware inventory
 Goal: capture the machine's specs while Windows 10 was still installed.
 Commands: `msinfo32` -> File -> Export; trimmed the export to remove the computer name, username, MAC address and serial numbers.
-Result: model confirmed as HP 700-215xt. BIOS is AMI 80.20 (2014) in Legacy mode, so the Ubuntu installer will use legacy/MBR boot. Secure Boot is unsupported. A Gigabit ethernet port is present. The drive is a single 1.82 TB disk with 1.78 TB free, so there is little data to preserve.
+Result: model confirmed as HP 700-215xt. BIOS is AMI 80.20 (2014) in Legacy mode, so the first install attempt will use legacy/MBR boot (the firmware also lists UEFI boot sources). Secure Boot is unsupported. A Gigabit ethernet port is present. The drive is a single 1.82 TB disk with 1.78 TB free, so there is little data to preserve.
 Notes: Windows reports virtualization as disabled in firmware. VT-x must be enabled in the BIOS before installing Docker or VMs.
+
+### 2026-10-06: BIOS configuration
+Goal: prepare the firmware for server use.
+Steps: entered BIOS Setup via Esc -> F10. Security -> System Security: Virtualization Technology (VTx) set to Enabled. Advanced -> Power-On Options: After Power Loss set to Power On (BIOS Power-On scheduler left disabled). Saved with File -> Save Changes and Exit.
+Boot order observed (not yet changed): UEFI boot sources (USB floppy/CD, USB hard drive), then Legacy boot sources (ATAPI CD, USB floppy/CD, USB hard drive, SATA hard drive, network controller).
+Notes: the firmware offers both UEFI and Legacy boot sources, so the machine is not strictly Legacy-only. Windows was installed in Legacy mode. Settings to be re-verified after the next BIOS visit.
 
 ## Problems & fixes
 
@@ -78,7 +84,7 @@ Steps to reproduce the system from scratch. Filled in as the build progresses.
 
 1. Back up any data on the machine; the install wipes the drive.
 2. BIOS (Legacy mode): enable virtualization (VT-x, currently disabled), set power-on after AC loss if available, and note boot order.
-3. Write the latest Ubuntu Server LTS ISO to a USB stick (8 GB or larger) with Rufus, using MBR partition scheme and BIOS target (the machine is Legacy-only).
+3. Write the latest Ubuntu Server LTS ISO to a USB stick (8 GB or larger) with Rufus, using MBR partition scheme and BIOS target (the existing Windows install boots in Legacy mode; try UEFI with GPT if Legacy fails).
 4. Install Ubuntu Server over wired ethernet and enable the OpenSSH server.
 5. Install Tailscale and confirm remote access.
 6. Harden and configure: TBD.
@@ -87,7 +93,7 @@ Steps to reproduce the system from scratch. Filled in as the build progresses.
 ## Roadmap
 
 - [x] Record hardware details (system info export, drives, network)
-- [ ] BIOS configuration
+- [x] BIOS configuration
 - [ ] Install Ubuntu Server LTS
 - [ ] SSH and Tailscale access
 - [ ] Baseline hardening (updates, firewall, key-based SSH)
