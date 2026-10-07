@@ -1,0 +1,35 @@
+System information (trimmed from msinfo32 export, taken while Windows 10 was still installed)
+Removed: computer name, username, MAC address, volume serial numbers, driver and device IDs.
+
+[System]
+System Manufacturer    Hewlett-Packard
+System Model           700-215xt
+System SKU             F9A62AV#ABA
+System Type            x64-based PC
+Platform Role          Desktop
+BaseBoard              Hewlett-Packard 2AF7, version 1.04
+BIOS                   AMI 80.20, 31/10/2014
+SMBIOS Version         2.7
+BIOS Mode              Legacy
+Secure Boot State      Unsupported
+Processor              Intel Core i7-4790 @ 3.60GHz, 4 cores / 8 threads
+Installed RAM          16.0 GB (15.9 GB usable)
+Installed OS           Windows 10 Home, build 19045
+
+[Virtualization (as reported by Windows)]
+VM Monitor Mode Extensions         Yes
+Second Level Address Translation   Yes
+Virtualization Enabled in Firmware No   <-- needs enabling in BIOS
+Data Execution Protection          Yes
+
+[Display]
+NVIDIA GeForce GTX 745, driver 32.0.15.7697
+
+[Storage]
+Seagate ST2000DM001-1ER164, 1.82 TB, single NTFS volume (C:), 1.78 TB free
+SanDisk SDSA6DM-016G, 14.91 GB (SD card in the built-in card reader, not a system drive)
+DVD writer
+
+[Network]
+Realtek PCIe GBE Family Controller (Gigabit Ethernet)
+Broadcom 802.11n wireless adapter
